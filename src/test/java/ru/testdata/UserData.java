@@ -8,4 +8,5 @@ public class UserData {
 
     public static final String INCORRECT_EMAIL = "barabashka511@yandex.ru";
     public static final String INCORRECT_PASSWORD = "9876543211";
+    public static final String INCORRECT_NAME = "barabashka511";
 }

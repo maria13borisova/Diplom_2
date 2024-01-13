@@ -9,6 +9,7 @@ import org.junit.Test;
 import ru.constants.Api;
 import ru.pojo.UserRegister;
 import ru.steps.*;
+import ru.testdata.UserData;
 
 public class UpdateUserTest {
 
@@ -23,6 +24,10 @@ public class UpdateUserTest {
 
         Response registerApiResponse = steps.getResponseFromApiCreate(userRegister);
         steps.checkResponseStatusCode(registerApiResponse, 200, true);
+
+        userRegister.setEmail(UserData.INCORRECT_EMAIL);
+        userRegister.setPassword(UserData.INCORRECT_PASSWORD);
+        userRegister.setName(UserData.INCORRECT_NAME);
 
         userBearer = steps.getBearerTokenFromResponse(registerApiResponse);
 

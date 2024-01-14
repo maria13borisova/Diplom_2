@@ -1,4 +1,4 @@
-package ru.pojo;
+package ru.pojo.User;
 
 public class UserResponse {
     private boolean success;

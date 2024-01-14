@@ -6,9 +6,9 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import ru.constants.Api;
 import ru.constants.ContentType;
-import ru.pojo.UserLogin;
-import ru.pojo.UserRegister;
-import ru.pojo.UserResponse;
+import ru.pojo.User.UserLogin;
+import ru.pojo.User.UserRegister;
+import ru.pojo.User.UserResponse;
 import ru.testdata.UserData;
 
 import static io.restassured.RestAssured.given;
@@ -49,7 +49,7 @@ public class StepsForUser {
         given()
                 .header("Authorization", userBearer)
                 .when()
-                .patch(Api.DELETE_USER_API_ENDPOINT)
+                .patch(Api.USER_DELETE_OR_PATCH_API_ENDPOINT)
                 .then()
                 .assertThat()
                 .statusCode(200)
@@ -61,7 +61,7 @@ public class StepsForUser {
     public void getUnauthorizedUpdateUserApi(UserRegister user){
         given()
                 .when()
-                .patch(Api.DELETE_USER_API_ENDPOINT)
+                .patch(Api.USER_DELETE_OR_PATCH_API_ENDPOINT)
                 .then()
                 .assertThat()
                 .statusCode(401)
@@ -136,7 +136,7 @@ public class StepsForUser {
         given()
                 .header("Authorization", userBearer)
                 .when()
-                .delete(Api.DELETE_USER_API_ENDPOINT)
+                .delete(Api.USER_DELETE_OR_PATCH_API_ENDPOINT)
                 .then()
                 .assertThat()
                 .statusCode(202)

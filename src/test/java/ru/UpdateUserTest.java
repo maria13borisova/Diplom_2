@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.constants.Api;
-import ru.pojo.UserRegister;
+import ru.pojo.User.UserRegister;
 import ru.steps.*;
 import ru.testdata.UserData;
 

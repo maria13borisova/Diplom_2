@@ -7,8 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ru.constants.Api;
-import ru.pojo.UserLogin;
-import ru.pojo.UserRegister;
+import ru.pojo.User.UserLogin;
+import ru.pojo.User.UserRegister;
 import ru.steps.*;
 
 public class LoginUserTest {

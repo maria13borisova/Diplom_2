@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import ru.constants.Api;
-import ru.pojo.UserRegister;
+import ru.pojo.User.UserRegister;
 import ru.steps.*;
 
 public class CreateUserTest {

@@ -63,7 +63,8 @@ public class OrderTest {
     public void createEmpryOrderIsFailed(){
         String errorMessage = "Ingredient ids must be provided";
         Response response = orderSteps.getOrderResponse(orderRequest);
-        orderSteps.checkStatusCodeIs400(response, errorMessage);
+        orderSteps.checkStatusCodeIs400(response,
+                errorMessage);
     }
 
     @Test
@@ -74,6 +75,30 @@ public class OrderTest {
 
         Response response = orderSteps.getOrderResponse(orderRequest);
         orderSteps.checkStatusCodeIs400(response, errorMessage);
+    }
+
+    @Test
+    @DisplayName("Get authorized user orders")
+    public void getAuthorizedUserOrders(){
+        /* создать заказы для пользователя */
+        for (int i = 0; i < 3; i++){
+            orderSteps.addCorrectIngredientToOrder(orderRequest.getIngredients());
+            Response response = orderSteps.getOrderResponse(orderRequest, userBearer);
+            orderSteps.checkStatusCodeIs200(response);
+        }
+
+        Response response = orderSteps.getUserOrdersResponse(userBearer);
+        orderSteps.checkStatusCodeIs200(response);
+
+        orderSteps.checkAuthorizedUserOrdersIsExist(response);
+
+    }
+
+    @Test
+    @DisplayName("Get unauthorized user orders")
+    public void getUnauthorizedUserOrders(){
+        Response response = orderSteps.getUserOrdersResponse();
+        orderSteps.checkStatusCodeIs401(response);
     }
 
     @After

@@ -16,6 +16,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class StepsForOrder {
 
@@ -105,6 +106,7 @@ public class StepsForOrder {
                 .body("success", equalTo(true));
     }
 
+    /* Ошибка 400 в ответе */
     @Step("Check response is not success and status code is 400, check response message")
     public void checkStatusCodeIs400(Response response, String expectMessage){
         response
@@ -114,4 +116,48 @@ public class StepsForOrder {
                 .body("success", equalTo(false))
                 .body("message", equalTo(expectMessage));
     }
+
+
+    /* Шаги для сервиса получения заказов одного пользователя */
+    /* Получить ответ от сервиса получения заказов пользователя, пользователь не авторизован */
+    @Step("Get authorized user orders response")
+    public Response getUserOrdersResponse(String userBearer){
+        Response response = given()
+                .header("Authorization", userBearer)
+                .when()
+                .get(Api.ORDERS_API_ENDPOINT);
+        return response;
+    }
+
+    /* Получить ответ от сервиса получения заказов пользователя, пользователь не авторизован */
+    @Step("Get unauthorized user orders response")
+    public Response getUserOrdersResponse(){
+        Response response = given()
+                .when()
+                .get(Api.ORDERS_API_ENDPOINT);
+        return response;
+    }
+
+    /* Ошибка 401 в ответе */
+    @Step("Check response is not success and status code is 401, check response message")
+    public void checkStatusCodeIs401(Response response){
+        response
+                .then()
+                .assertThat()
+                .statusCode(401)
+                .body("success", equalTo(false))
+                .body("message", equalTo("You should be authorised"));
+    }
+
+
+    /* Проверить значения в заказе авторизованного пользователя */
+    @Step("Check authorized response values")
+    public void checkAuthorizedUserOrdersIsExist(Response response){
+        response
+                .then()
+                .assertThat()
+                .body("total", greaterThan(0))
+                .body("totalToday", greaterThan(0));
+    }
+
 }

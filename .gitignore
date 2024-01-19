@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+
+# IDEA settngs
+.idea/
+.allure/
+/target/*
+!/target/allure-results/
